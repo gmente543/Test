@@ -25,8 +25,25 @@ jobs:
         with:
           name: Download the file
           path: build/libs
-          
-    
+        
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: 'production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
-  
- 
+    steps:
+    - name: Download artifact from build job
+      uses: actions/download-artifact@v2
+      with:
+        name: Download the file
+
+    - name: Deploy to Azure Web App
+      id: deploy-to-webapp
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'MWO-TGL-SBX-POC'
+        slot-name: 'production'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_44a0963e50194b7e84665f80d73ad70f }}
+        package: '*.war'
