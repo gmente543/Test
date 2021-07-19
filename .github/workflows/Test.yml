@@ -19,13 +19,12 @@ jobs:
         name: Download the file
         with:
           url: "https://tomcat.apache.org/tomcat-8.5-doc/appdev/sample/sample.war"
-          target: test1/
+          target: build/libs 
           
-      - uses: actions/checkout@master
-      - name: copy file
-        uses: canastro/copy-file-action@master
+      - uses: azure/webapps-deploy@v2
         with:
-          source: "test1/sample.war"
-          target: "wars/sample.war"
-
+          app-name: 'MWO-TGL-SBX-POC'
+          slot-name: 'production'
+          publish-profile: ${{ secrets.AzureAppService_PublishProfile_44a0963e50194b7e84665f80d73ad70f }}
+          package: '*.war'
 
