@@ -14,21 +14,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-
-    - name: Set up Java version
-      uses: actions/setup-java@v1
-      with:
-        java-version: '11'
-
-    - name: Build with Maven
-      run: mvn clean install
-
-    - name: Upload artifact for deployment job
-      uses: actions/upload-artifact@v2
-      with:
-        name: java-app
-        path: '${{ github.workspace }}/target/*.war'
+      - uses: suisei-cn/actions-download-file@v1
+        id: downloadfile  # Remember to give an ID if you need the output filename
+        name: Download the file
+        with:
+          url: "https://tomcat.apache.org/tomcat-8.5-doc/appdev/sample/sample.war"
+          target: build/libs 
+          
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v2
+        with:
+          name: Download the file
+          path: build/libs
 
   deploy:
     runs-on: ubuntu-latest
@@ -41,7 +38,7 @@ jobs:
     - name: Download artifact from build job
       uses: actions/download-artifact@v2
       with:
-        name: java-app
+        name:  Download the file
 
     - name: Deploy to Azure Web App
       id: deploy-to-webapp
