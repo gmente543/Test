@@ -15,24 +15,8 @@ jobs:
     steps: 
     
     - name: Download a file
-      run: wget https://tomcat.apache.org/tomcat-8.5-doc/appdev/sample/sample.war -O Test/wars
+      run: wget https://tomcat.apache.org/tomcat-8.5-doc/appdev/sample/sample.war -O Test/sample.war
     
     
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    environment:
-      name: 'production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-
-    steps:
-
-    - name: Deploy to Azure Web App
-      id: deploy-to-webapp
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: 'MWO-TGL-SBX-POC'
-        slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_0236ecb937d34f88bf44f8a6d04ddc91 }}
-        package: '*.war'
+ 
