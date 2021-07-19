@@ -20,3 +20,10 @@ jobs:
         with:
           url: "https://tomcat.apache.org/tomcat-8.5-doc/appdev/sample/sample.war"
           target: build/libs
+          
+      - uses: actions/checkout@master
+      - name: copy file
+        uses: canastro/copy-file-action@master
+        with:
+          source: "build/libs/*.war"
+          target: "Wars"
