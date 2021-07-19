@@ -21,9 +21,14 @@ jobs:
           url: "https://tomcat.apache.org/tomcat-8.5-doc/appdev/sample/sample.war"
           target: build/libs
           
-      - uses: actions/checkout@master
-      - name: copy file
-        uses: canastro/copy-file-action@master
+#      - uses: actions/checkout@master
+#      - name: copy file
+#        uses: canastro/copy-file-action@master
+#        with:
+#          source: "build/libs/sample.war"
+#          target: "wars/sample.war"
+
+      - uses: actions/download-artifact@v2
         with:
-          source: "build/libs/sample.war"
-          target: "wars/sample.war"
+          name: Download the file
+          path: ~/wars/
