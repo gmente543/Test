@@ -13,12 +13,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps: 
-    - uses: suisei-cn/actions-download-file@v1
-      id: downloadfile  # Remember to give an ID if you need the output filename
-      name: Download the file
-      with:
-        url: "https://tomcat.apache.org/tomcat-8.5-doc/appdev/sample/sample.war"
-        target: '${{ github.workspace }}/target/'
     
     - name: Download a file
       run: wget https://tomcat.apache.org/tomcat-8.5-doc/appdev/sample/sample.war -O Test/wars
