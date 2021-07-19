@@ -25,5 +25,5 @@ jobs:
       - name: copy file
         uses: canastro/copy-file-action@master
         with:
-          source: "build/libs/*.war"
-          target: "Wars"
+          source: "build/libs/sample.war"
+          target: "wars/sample.war"
