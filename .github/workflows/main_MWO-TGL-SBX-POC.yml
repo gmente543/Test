@@ -8,6 +8,11 @@ on:
     branches:
       - main
   workflow_dispatch:
+   inputs:
+      artifacturl:
+        description: 'provide artifact url'
+        required: true
+        default: ''
 
 jobs:
   build:
@@ -18,7 +23,7 @@ jobs:
         id: downloadfile  # Remember to give an ID if you need the output filename
         name: Download the file
         with:
-          url: "https://tomcat.apache.org/tomcat-8.5-doc/appdev/sample/sample.war"
+          url: "${{ github.event.inputs.artifacturl }}"
           target: build/libs 
           
       - name: rename the war file
