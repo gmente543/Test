@@ -13,6 +13,10 @@ on:
         description: 'provide artifact url'
         required: true
         default: ''
+      appname:
+        description: 'application name'
+        required: true
+        default: ''
 
 jobs:
   build:
@@ -28,7 +32,7 @@ jobs:
           
       - name: rename the war file
         run: |
-          mv build/libs/sample.war build/libs/sample1.war    
+          mv build/libs/sample.war build/libs/${{ github.event.inputs.appname }}  
           
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
