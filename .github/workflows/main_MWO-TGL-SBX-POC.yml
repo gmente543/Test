@@ -21,11 +21,15 @@ jobs:
           url: "https://tomcat.apache.org/tomcat-8.5-doc/appdev/sample/sample.war"
           target: build/libs 
           
+      - name: rename the war file
+        run: |
+          mv /build/libs/sample.war /build/libs/sample123.war    
+          
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: Download the file
-          path: build/libs/sample1.war
+          path: build/libs/
 
   deploy:
     runs-on: ubuntu-latest
