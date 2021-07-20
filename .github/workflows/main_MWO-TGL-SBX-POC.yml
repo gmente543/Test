@@ -18,12 +18,12 @@ jobs:
         id: downloadfile  # Remember to give an ID if you need the output filename
         name: Download the file
         with:
-          url: "https://tomcat.apache.org/tomcat-8.5-doc/appdev/sample/sample.war"
+          url: "https://archiva.tfanet.org/archiva/repository/snapshots/org/tfa/ada-webapp/2.1.0-azure-sandbox-SNAPSHOT/ada-webapp-2.1.0-azure-sandbox-20210311.214407-7-dev.war"
           target: build/libs 
           
       - name: rename the war file
         run: |
-          mv build/libs/sample.war build/libs/sample123.war    
+          mv build/libs/ada-webapp-2.1.0-azure-sandbox-20210311.214407-7-dev.war build/libs/ada.war    
           
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
