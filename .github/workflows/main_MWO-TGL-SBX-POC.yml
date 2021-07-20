@@ -17,6 +17,10 @@ on:
         description: 'application name'
         required: true
         default: ''
+      azureservername:
+        description: 'Azure service name'
+        required: true
+        default: ''
 
 jobs:
   build:
@@ -32,7 +36,7 @@ jobs:
           
       - name: rename the war file
         run: |
-          mv build/libs/sample.war build/libs/${{ github.event.inputs.appname }}  
+          mv build/libs/sample.war build/libs/${{ github.event.inputs.appname }}.war
           
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
@@ -57,7 +61,7 @@ jobs:
       id: deploy-to-webapp
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'MWO-TGL-SBX-POC'
+        app-name: '${{ github.event.inputs.azureservername }}'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_1e669438179845318dac62bc88e37d23 }}
         package: '*.war'
