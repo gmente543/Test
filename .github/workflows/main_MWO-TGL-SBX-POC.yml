@@ -23,7 +23,7 @@ jobs:
           
       - name: rename the war file
         run: |
-          mv build/libs/sample.war build/libs/sample.war    
+          mv build/libs/sample.war build/libs/sample1.war    
           
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
