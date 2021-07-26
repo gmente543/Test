@@ -4,9 +4,9 @@
 name: Build and deploy WAR app to Azure Web App - MWO-TGL-SBX-POC
 
 on:
-  push:
-    branches:
-      - main
+#  push:
+#    branches:
+#      - main
   workflow_dispatch:
    inputs:
       artifacturl:
@@ -36,6 +36,7 @@ jobs:
           
       - name: rename the war file
         run: |
+          ls -lrt
           mv build/libs/sample.war build/libs/${{ github.event.inputs.appname }}.war
           
       - name: Upload artifact for deployment job
